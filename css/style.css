@@ -1,0 +1,24 @@
+body {
+	background: #eee;
+	margin: 0 auto;
+	overflow: hidden;
+
+}
+
+#palette{
+	background: #222;
+	padding: 3px;
+	width: 100%;
+}
+
+.button{
+	background: #eee;
+	border: 0;
+}
+
+.paper{
+	background: white;
+	box-shadow: 0 0 15px #999;
+	/*margin: 20px auto;*/
+	display: inline-block;
+}
