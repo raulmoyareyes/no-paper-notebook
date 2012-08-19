@@ -1,0 +1,52 @@
+* {
+	color: #444;
+	font-family:Monospace;
+	font-size:12px;
+}
+
+body {
+	margin: 0 auto;
+	overflow: hidden;
+	background: #eee;
+}
+
+body div {
+	border: 1px solid black;
+	margin: 0 auto;
+	width: 800px;
+}
+select {
+	font-size:11px;
+	text-transform: uppercase;
+	text-align:center;
+}
+
+hr {
+	background-color: #ccc;
+	border: 0;
+	height: 1px;
+	margin: 20px 0px;
+}
+
+.gui {
+	background: #eee;
+	border-bottom: 1px solid #ddd;
+	color: #ccc;
+	cursor: default;
+	line-height: 18px;
+	padding: 5px 10px;
+	text-align: center;
+	text-transform: uppercase;
+	width: 100%; /*280px;*/
+}
+
+.button {
+	cursor: pointer;
+	padding: 2px;
+}
+
+.key {
+	background-color: #eee;
+	margin-left: 1px;
+	padding: 0px 8px;
+}
