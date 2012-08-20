@@ -2,23 +2,29 @@ body {
 	background: #eee;
 	margin: 0 auto;
 	overflow: hidden;
-
+	text-align: center;
 }
 
 #palette{
-	background: #222;
-	padding: 3px;
+	background: rgba(173,223,175,0.3);
+	height: 40px;
+	position: absolute;
 	width: 100%;
+	z-index: 3;
 }
 
 .button{
-	background: #eee;
+	background: white;
 	border: 0;
+	margin-top: 10px;
 }
 
 .paper{
 	background: white;
 	box-shadow: 0 0 15px #999;
-	/*margin: 20px auto;*/
 	display: inline-block;
+	margin-top: 50px;
+	position: relative;
+	z-index: 1;
+	top:0px;
 }

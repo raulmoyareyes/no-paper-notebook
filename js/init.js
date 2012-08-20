@@ -1,7 +1,11 @@
 ;
 /* PARÁMETOS GLOBALES ********************************************************/
-	var WIDTH=window.innerWidth;//744;
-	var HEIGHT=window.innerHeight;//1052;
+
+	var rel;
+	if(window.innerWidth<2480){rel=(window.innerWidth*0.9)/2480;}else{rel=2480/(window.innerWidth*1.1);}
+
+	var WIDTH=2480*rel;
+	var HEIGHT=3508*rel;
 	var mouseX=0;
 	var mouseY=0;
 	var PSIZE=1;
@@ -10,13 +14,31 @@
 	var STORAGE=window.localStorage;
 
 
+	function downPaper(){
+
+		//comprobar que no se baja mas del folio
+		var v = (canvas.style.top).substr(0,(canvas.style.top).length-2);
+		console.log(v);
+		canvas.style.top = v-15+"px";
+	}
+
+	function upPaper(){
+
+
+	}
+
+	function plusPSize(){
+		PSIZE++;
+	}
+
 /* FUNCION CREAR UNA PÁGINA **************************************************/
 	function init(){
 
 		canvas=document.createElement("canvas");
+		canvas.id="canvas";
 		canvas.className="paper";
-		canvas.style.width=WIDTH+"px";
-		canvas.style.height=HEIGHT+"px";
+		canvas.width=WIDTH;
+		canvas.height=HEIGHT;
 		canvas.style.cursor="crosshair";
 		document.body.appendChild(canvas);
 		context=canvas.getContext("2d");
@@ -44,17 +66,12 @@
 		a.preventDefault();
 	}
 
-	/* Si te sales del canvas deja de dibujar
-	function onDocumentMouseOut(a){
-		onCanvasMouseUp();
-	}*/
-
 	// Click en el canvas
 	function onCanvasMouseDown(b){
 		var c,a;
 		clearTimeout(saveTimeOut);
 		//BRUSH_PRESSURE=wacom&&wacom.isWacom?wacom.pressure:1;*/
-		brush.strokeStart(b.clientX,b.clientY);
+		brush.strokeStart(b.clientX-canvas.offsetLeft,b.clientY-canvas.offsetTop);
 		window.addEventListener("mousemove",onCanvasMouseMove,false);
 		window.addEventListener("mouseup",onCanvasMouseUp,false);
 	}
@@ -62,7 +79,7 @@
 	// Mover el raton con click sobre el canvas
 	function onCanvasMouseMove(a){
 		//BRUSH_PRESSURE=wacom&&wacom.isWacom?wacom.pressure:1;
-		brush.stroke(a.clientX,a.clientY);
+		brush.stroke(a.clientX-canvas.offsetLeft,a.clientY-canvas.offsetTop);
 	}
 
 	// soltar click del canvas
@@ -114,17 +131,14 @@
 			this.prevMouseX=b;
 			this.prevMouseY=a
 		},stroke:function(b,a){
-			console.log("has cliclado en x: "+this.prevMouseX);
-			this.context.lineWidth=5;
+			this.context.lineWidth=PSIZE;
 			this.context.strokeStyle="rgba(0,0,0,1)";//+COLOR[0]+", "+COLOR[1]+", "+COLOR[2]+", "+0.5*BRUSH_PRESSURE+")";
 			this.context.beginPath();
 			this.context.moveTo(this.prevMouseX,this.prevMouseY);
 			this.context.lineTo(b,a);
+			this.context.lineCap="round";
 			this.context.stroke();
 			this.prevMouseX=b;
 			this.prevMouseY=a
 		},strokeEnd:function(){}
 	};
-
-
-//http://www.esedeerre.com/ejemplo/20/182/html5-pizarra-con-canvas-y-javascript
