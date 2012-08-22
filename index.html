@@ -11,7 +11,8 @@
 	<!-- resolucion de un a4 2480 x 3508 pixeles orig 0.3x(744 x 1052) -->
 </head>
 <body>
-	<script language="javascript" type="text/javascript" src="js/init.js"></script>
+	<script language="javascript" type="text/javascript" src="js/controller.js"></script>
+	<script language="javascript" type="text/javascript" src="js/brushLine.js"></script>
 	
 	<div id="palette">
 		<input class="button" type="button" name="Submit" value="nuevo folio" onclick="init()"/>
@@ -19,5 +20,10 @@
 		<input class="button" type="button" name="Submit" value="bajar folio" onclick="downPaper()"/>
 		<input class="button" type="button" name="Submit" value="mas grosor pincel" onclick="plusPSize()"/>
 	</div>
+
+	<canvas id="c1"></canvas>
+	<script>
+		var c1 = new noPaperNotebook(document.getElementById("c1"));
+	</script>
 </body>
 </html>
