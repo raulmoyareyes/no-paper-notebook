@@ -1,7 +1,7 @@
 body {
 	background: #eee;
 	margin: 0 auto;
-	overflow: hidden;
+	/*overflow: hidden;*/
 	text-align: center;
 }
 
@@ -23,8 +23,9 @@ body {
 	background: white;
 	box-shadow: 0 0 15px #999;
 	display: inline-block;
-	margin-top: 50px;
-	position: relative;
+	margin: 50px;
+	position: absolute;
 	z-index: 1;
-	top:0px;
+	top: 0;
+	left: 0;
 }
