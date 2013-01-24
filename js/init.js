@@ -12,23 +12,33 @@
 	var saveTimeOut;
 	var brush;
 	var STORAGE=window.localStorage;
+	var canvas;
+	var context;
 
 
 	function downPaper(){
 
 		//comprobar que no se baja mas del folio
 		var v = (canvas.style.top).substr(0,(canvas.style.top).length-2);
-		console.log(v);
 		canvas.style.top = v-15+"px";
 	}
 
 	function upPaper(){
-
+		var v = (canvas.style.top).substr(0,(canvas.style.top).length-2);
+		canvas.style.top = (parseInt(v)+15)+"px";
 
 	}
 
 	function plusPSize(){
 		PSIZE++;
+	}
+
+	function minusPSize(){
+		if(PSIZE > 1){PSIZE--;}
+	}
+
+	function nuevo(){
+		canvas.width=canvas.width;
 	}
 
 /* FUNCION CREAR UNA PÁGINA **************************************************/
@@ -40,6 +50,7 @@
 		canvas.width=WIDTH;
 		canvas.height=HEIGHT;
 		canvas.style.cursor="crosshair";
+		canvas.style.top = "0px"
 		document.body.appendChild(canvas);
 		context=canvas.getContext("2d");
 
@@ -48,9 +59,11 @@
 		}
 
 		window.addEventListener("mousemove",onWindowMouseMove,false);
+		window.addEventListener("resize",onWindowResize,false);
 		document.addEventListener("mousedown",onDocumentMouseDown,false);
 		canvas.addEventListener("mousedown",onCanvasMouseDown,false);
 		canvas.addEventListener("touchstart",onCanvasTouchStart,false);
+		onWindowResize(null);
 
 	}
 
@@ -117,6 +130,17 @@
 		}
 	}
 
+	function onWindowResize(){
+
+		if(window.innerWidth<2480){rel=(window.innerWidth*0.9)/2480;}else{rel=2480/(window.innerWidth*1.1);}
+
+		WIDTH=2480*rel;
+		HEIGHT=3508*rel;
+
+		canvas.width=WIDTH;
+		canvas.height=HEIGHT;
+	}
+
 
 /* PINCELES ******************************************************************/
 	function simple(a){
@@ -142,3 +166,41 @@
 			this.prevMouseY=a
 		},strokeEnd:function(){}
 	};
+
+function circles(a){this.init(a)}
+
+circles.prototype={
+	context:null,
+	prevMouseX:null,
+	prevMouseY:null,
+	count:null,
+	init:function(a){
+		this.context=a;
+		this.context.globalCompositeOperation="source-over"
+	},
+	destroy:function(){},
+	strokeStart:function(b,a){
+		this.prevMouseX=b;
+		this.prevMouseY=a},
+	stroke:function(e,b){
+		var g,l,k,h,f,c,j,a;
+		this.context.lineWidth=BRUSH_SIZE;
+		this.context.strokeStyle="rgba("+COLOR[0]+", "+COLOR[1]+", "+COLOR[2]+", "+0.1*BRUSH_PRESSURE+")";
+		l=e-this.prevMouseX;
+		k=b-this.prevMouseY;
+		h=Math.sqrt(l*l+k*k)*2;
+		f=Math.floor(e/100)*100+50;
+		c=Math.floor(b/100)*100+50;
+		j=Math.floor(Math.random()*10);
+		a=h/j;
+		for(g=0; g<j; g++){
+			this.context.beginPath();
+			this.context.arc(f,c,(j-g)*a,0,Math.PI*2,true);
+			this.context.stroke()}this.prevMouseX=e;
+			this.prevMouseY=b
+		},strokeEnd:function(){}
+	};
+
+
+
+	init();

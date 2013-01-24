@@ -11,13 +11,15 @@
 	<!-- resolucion de un a4 2480 x 3508 pixeles orig 0.3x(744 x 1052) -->
 </head>
 <body>
-	<script language="javascript" type="text/javascript" src="js/init.js"></script>
-	
 	<div id="palette">
-		<input class="button" type="button" name="Submit" value="nuevo folio" onclick="init()"/>
-		<input class="button" type="button" name="Submit" value="subir folio" onclick="upPaper()"/>
-		<input class="button" type="button" name="Submit" value="bajar folio" onclick="downPaper()"/>
-		<input class="button" type="button" name="Submit" value="mas grosor pincel" onclick="plusPSize()"/>
+		<input class="button" type="button" name="Submit" value="nuevo folio" onclick="nuevo()"/>
+		Mover folio:
+		<input class="button" type="button" name="Submit" value="&uarr;" onclick="upPaper()"/>
+		<input class="button" type="button" name="Submit" value="&darr;" onclick="downPaper()"/>
+		Tamaño del pincel:
+		<input class="button" type="button" name="Submit" value="+" onclick="plusPSize()"/>
+		<input class="button" type="button" name="Submit" value="-" onclick="minusPSize()"/>
 	</div>
+	<script src="js/init.js"></script>
 </body>
 </html>
